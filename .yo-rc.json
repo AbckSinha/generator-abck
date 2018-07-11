@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Abhishek Sinha",
+      "authorEmail": "abhishek.sinha132@gmail.com",
+      "authorUrl": "https://github.com/AbckSinha/generator-abck"
+    }
+  }
+}
