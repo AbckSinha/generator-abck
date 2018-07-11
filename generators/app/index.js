@@ -2,26 +2,36 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+var path = require('path');
+var fs = require('fs');
 
-module.exports = class extends Generator {
+var prompts = require('./sources/prompts.js');
+
+var MyAppGenerator = class extends Generator {
+
+  initializing() {
+    this.pkg = require('../../package.json');
+    this.fileCount = fs.readdirSync('.').length;
+    // abort when directory is not empty on first run
+    if (this.fileCount > 0) {
+      this.log(chalk.red('Non-empty directory. Cordova needs an empty directory to set up project'));
+      process.exit(1);
+    }
+  }
+
   prompting() {
-    // Have Yeoman greet the user.
+    var done = this.async();
     this.log(
-      yosay(`Welcome to the cat\'s meow ${chalk.red('generator-abck')} generator!`)
+      yosay(`Welcome to Full Fledged Ionic2 ${chalk.red('generator-abck')} generator!`)
     );
 
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'enter name of project',
-        default: true
-      }
-    ];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
+    return this.prompt(prompts.prompts).then(props => {
+      // To access props later use this.props.projectName;
       this.props = props;
+      if(props.appType.length>1){
+        this.log(chalk.red('Please select only one app type'));
+        process.exit(1);
+      }
     });
   }
 
@@ -35,4 +45,7 @@ module.exports = class extends Generator {
   install() {
     this.installDependencies();
   }
-};
+}
+
+module.exports = MyAppGenerator;
+
