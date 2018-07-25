@@ -1,5 +1,5 @@
 # generator-abck [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> To create ionic2 app
+> Use it to create Ionic2 App
 
 ## Installation
 
